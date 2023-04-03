@@ -1,22 +1,23 @@
 package com.unisabana.software.tienda.service;
 
 import com.unisabana.software.tienda.controller.dto.SaleDTO;
+import com.unisabana.software.tienda.model.Sale;
 
 import java.sql.Date;
 import java.util.List;
 
 public interface SaleService {
-    boolean saveSale(SaleDTO saleDTO);
+    boolean saveSale(Sale sale);
 
-    SaleDTO readSale(int id);
+    Sale readSale(int id);
 
     boolean deleteSale(int id);
 
     boolean limitTransaction(int documentClient);
 
-    List<SaleDTO> findByDocumentClient(int documentClient);
+    List<Sale> findByDocumentClient(int documentClient);
 
-    List<SaleDTO> findAll();
+    List<Sale> findAll();
 
-    List<SaleDTO> findByDocumentClientAndDateCreated(int documentClient, Date valueOf);
+    List<Sale> findByDocumentClientAndDateCreated(int documentClient, Date valueOf);
 }

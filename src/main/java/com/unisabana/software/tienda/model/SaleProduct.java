@@ -1,7 +1,5 @@
 package com.unisabana.software.tienda.model;
 
-import com.unisabana.software.tienda.controller.dto.SaleDTO;
-import com.unisabana.software.tienda.controller.dto.StockDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -18,7 +16,7 @@ public class SaleProduct {
     private Integer product;
     @ManyToOne
     @JoinColumn(name = "PRODUCT")
-    private StockDTO stockDTO;
+    private Stock stock;
 
     @Column(name = "QUANTITY", length = 10)
     private Integer quantity;
@@ -27,5 +25,5 @@ public class SaleProduct {
     private Integer saleID;
     @ManyToOne
     @JoinColumn(name = "SALE_ID")
-    private SaleDTO saleDTO;
+    private Sale sale;
 }

@@ -1,9 +1,9 @@
 package com.unisabana.software.tienda.service.impl;
 
 import com.unisabana.software.tienda.controller.dto.SaleDTO;
+import com.unisabana.software.tienda.model.Sale;
 import com.unisabana.software.tienda.repository.SaleRepository;
 import com.unisabana.software.tienda.service.SaleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -13,17 +13,16 @@ import java.util.List;
 
 @Service
 public class SaleServiceImpl implements SaleService {
-    @Autowired
     private SaleRepository saleRepository;
 
     @Override
-    public boolean saveSale(SaleDTO saleDTO) {
-        saleRepository.save(saleDTO);
-        return saleRepository.existsById(Math.toIntExact(saleDTO.getId()));
+    public boolean saveSale(Sale sale) {
+        saleRepository.save(sale);
+        return saleRepository.existsById(Math.toIntExact(sale.getId()));
     }
 
     @Override
-    public SaleDTO readSale(int id) {
+    public Sale readSale(int id) {
         return saleRepository.getReferenceById(id);
     }
 
@@ -38,7 +37,7 @@ public class SaleServiceImpl implements SaleService {
         boolean result;
         int transactionCount = 0;
 
-        for(SaleDTO s: saleRepository.findAll()) {
+        for(Sale s: saleRepository.findAll()) {
             if(s.getDocumentClient().equals(documentClient) && s.getDateCreated().getDay() == LocalDate.now().getDayOfMonth()) {
                 transactionCount ++;
             }
@@ -48,10 +47,10 @@ public class SaleServiceImpl implements SaleService {
     }
 
     @Override
-    public List<SaleDTO> findByDocumentClient(int documentClient) {
-        List<SaleDTO> sales = new ArrayList<>();
+    public List<Sale> findByDocumentClient(int documentClient) {
+        List<Sale> sales = new ArrayList<>();
 
-        for(SaleDTO s: saleRepository.findAll()) {
+        for(Sale s: saleRepository.findAll()) {
             if(s.getDocumentClient().equals(documentClient)) {
                 sales.add(s);
             }
@@ -61,12 +60,12 @@ public class SaleServiceImpl implements SaleService {
     }
 
     @Override
-    public List<SaleDTO> findAll() {
+    public List<Sale> findAll() {
         return saleRepository.findAll();
     }
 
     @Override
-    public List<SaleDTO> findByDocumentClientAndDateCreated(int documentClient, Date valueOf) {
+    public List<Sale> findByDocumentClientAndDateCreated(int documentClient, Date valueOf) {
         return null;
     }
 }

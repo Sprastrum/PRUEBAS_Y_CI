@@ -29,5 +29,5 @@ public class Stock {
     private Integer value;
 
     @OneToMany
-    private List<SaleProductDTO> saleProductDTOList;
+    private List<SaleProduct> saleProductDTOList;
 }

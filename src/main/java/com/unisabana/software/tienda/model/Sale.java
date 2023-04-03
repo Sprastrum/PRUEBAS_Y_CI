@@ -3,9 +3,7 @@ package com.unisabana.software.tienda.model;
 import com.unisabana.software.tienda.controller.dto.SaleDTO;
 import com.unisabana.software.tienda.controller.dto.SaleProductDTO;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.Hibernate;
 
 import java.util.Date;
@@ -14,6 +12,8 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "SALE")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +32,7 @@ public class Sale {
 
     @OneToMany
     @ToString.Exclude
-    private List<SaleProductDTO> saleProductDTOList;
+    private List<SaleProduct> saleProductDTOList;
 
     @Override
     public boolean equals(Object o) {
