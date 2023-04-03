@@ -1,0 +1,134 @@
+{
+	"info": {
+		"_postman_id": "4dc4d26e-13a1-425f-a9f2-0d985b52f4e3",
+		"name": "Funcionalidades",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26155053"
+	},
+	"item": [
+		{
+			"name": "ProductTransactions",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/product/transactions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"product",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ProductSearchByID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"jabon\",\r\n    \"price\" : 3000,\r\n    \"stock\" : 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/product/transaction/searchbyid/111",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"product",
+						"transaction",
+						"searchbyid",
+						"111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ProductValidation",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"jabon\",\r\n    \"price\" : 3000,\r\n    \"stock\" : 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/product/transaction/validation/111",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"product",
+						"transaction",
+						"validation",
+						"111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ProductSave",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8081/product/save",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"product",
+						"save"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
