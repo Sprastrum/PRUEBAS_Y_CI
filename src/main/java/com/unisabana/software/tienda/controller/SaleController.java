@@ -8,8 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,12 +28,13 @@ public class SaleController {
     }
 
     @RequestMapping(value = "/sale/saveSaleListProducts", method = RequestMethod.POST)
-    public List<Sale> saveSaleListProducts(@RequestBody List<SaleDTO> saleDTO) {
+    public List<Sale> saveSaleListProducts(@RequestBody List<SaleDTO> salesDTO) {
         List<Sale> sales = new ArrayList<>();
 
-        for(SaleDTO s: saleDTO) {
-            if(service.limitTransaction(s.getDocumentClient(), Date.valueOf(LocalDate.now()))) {
+        for(SaleDTO s: salesDTO) {
+            if(service.limitTransaction(s.getDocumentClient(), s.getDateCreated())) {
                 service.save(s.toModel());
+                sales.add(s.toModel());
             }
         }
 
