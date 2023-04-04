@@ -1,7 +1,6 @@
 package com.unisabana.software.tienda.controller;
 
 import com.unisabana.software.tienda.controller.dto.StockDTO;
-import com.unisabana.software.tienda.model.Sale;
 import com.unisabana.software.tienda.model.Stock;
 import com.unisabana.software.tienda.service.StockService;
 import jakarta.annotation.Resource;

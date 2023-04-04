@@ -6,6 +6,7 @@ import com.unisabana.software.tienda.service.SaleProductService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -28,6 +29,11 @@ public class SaleProductServiceImpl implements SaleProductService {
     public boolean delete(int id) {
         saleProductRepository.deleteById(id);
         return !saleProductRepository.existsById(id);
+    }
+
+    @Override
+    public boolean limitTransaction(int documentClient, Date date) {
+        return saleProductRepository.limitTransactions(documentClient, date).size() < 3;
     }
 
     @Override

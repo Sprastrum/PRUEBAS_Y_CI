@@ -1,6 +1,5 @@
 package com.unisabana.software.tienda.service.impl;
 
-import com.unisabana.software.tienda.model.Sale;
 import com.unisabana.software.tienda.model.Stock;
 import com.unisabana.software.tienda.repository.StockRepository;
 import com.unisabana.software.tienda.service.StockService;

@@ -1,6 +1,5 @@
 package com.unisabana.software.tienda.controller.dto;
 
-import com.unisabana.software.tienda.model.Sale;
 import com.unisabana.software.tienda.model.SaleProduct;
 import com.unisabana.software.tienda.model.Stock;
 import lombok.Data;
