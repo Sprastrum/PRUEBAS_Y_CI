@@ -2,6 +2,7 @@ package com.unisabana.software.tienda.controller;
 
 import com.unisabana.software.tienda.model.Sale;
 import com.unisabana.software.tienda.service.SaleService;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 public class SaleController {
+    @Resource
     private SaleService service;
 
     public SaleController(List<String> products) {
@@ -34,7 +36,7 @@ public class SaleController {
     }
 
     @GetMapping("/product/transaction/validation/{ID}")
-    public List <Sale> Validation(@PathVariable("ID") int documentClient) {
+    public List <Sale> validation(@PathVariable("ID") int documentClient) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate today = LocalDate.now();
         //List <SaleDTO> sales = service.findByDocumentClientAndDateCreated(documentClient, Date.valueOf(today));
