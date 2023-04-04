@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -21,11 +22,24 @@ public class SaleController {
 
     @PostMapping("/sale/saveSale")
     public Sale saveSale(@RequestBody SaleDTO saleDTO) {
-        if(service.limitTransaction(saleDTO.getDocumentClient(), Date.valueOf(LocalDate.now()))) {
+        if(service.limitTransaction(saleDTO.getDocumentClient(), saleDTO.getDateCreated())) {
             service.save(saleDTO.toModel());
         }
 
         return saleDTO.toModel();
+    }
+
+    @RequestMapping(value = "/sale/saveSaleListProducts", method = RequestMethod.POST)
+    public List<Sale> saveSaleListProducts(@RequestBody List<SaleDTO> saleDTO) {
+        List<Sale> sales = new ArrayList<>();
+
+        for(SaleDTO s: saleDTO) {
+            if(service.limitTransaction(s.getDocumentClient(), Date.valueOf(LocalDate.now()))) {
+                service.save(s.toModel());
+            }
+        }
+
+        return sales;
     }
 
     @GetMapping("/sale/allSales")
