@@ -1,6 +1,5 @@
 package com.unisabana.software.tienda.service.impl;
 
-import com.unisabana.software.tienda.controller.dto.SaleDTO;
 import com.unisabana.software.tienda.model.Sale;
 import com.unisabana.software.tienda.repository.SaleRepository;
 import com.unisabana.software.tienda.service.SaleService;
@@ -34,7 +33,6 @@ public class SaleServiceImpl implements SaleService {
 
     @Override
     public boolean limitTransaction(int documentClient) {
-        boolean result;
         int transactionCount = 0;
 
         for(Sale s: saleRepository.findAll()) {

@@ -1,6 +1,5 @@
 package com.unisabana.software.tienda.service;
 
-import com.unisabana.software.tienda.controller.dto.SaleDTO;
 import com.unisabana.software.tienda.model.Sale;
 
 import java.sql.Date;
