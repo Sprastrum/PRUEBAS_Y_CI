@@ -3,12 +3,14 @@ package com.unisabana.software.tienda.service.impl;
 import com.unisabana.software.tienda.model.SaleProduct;
 import com.unisabana.software.tienda.repository.SaleProductRepository;
 import com.unisabana.software.tienda.service.SaleProductService;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class SaleProductServiceImpl implements SaleProductService {
+    @Resource
     private SaleProductRepository saleProductRepository;
 
     @Override

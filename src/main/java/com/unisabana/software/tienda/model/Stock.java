@@ -1,33 +1,54 @@
 package com.unisabana.software.tienda.model;
 
-import com.unisabana.software.tienda.controller.dto.SaleProductDTO;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
-@Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "STOCK")
 public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false, length = 10)
+    @Column(name = "ID", nullable = false, length = 10) @Getter
+    @Setter
     private Integer id;
 
-    @Column(name = "DATE_CREATED", nullable = false)
+    @Column(name = "DATE_CREATED", nullable = false) @Getter
+    @Setter
     private Date dateCreated;
 
-    @Column(name = "NAME", nullable = false, length = 100)
+    @Column(name = "NAME", nullable = false, length = 100) @Getter
+    @Setter
     private String name;
 
-    @Column(name = "QUANTITY", nullable = false, length = 10)
+    @Column(name = "QUANTITY", nullable = false, length = 10) @Getter
+    @Setter
     private Integer quantity;
 
-    @Column(name = "VALUE", nullable = false, length = 10)
-    private Integer value;
+    @Column(name = "UNIT_VALUE", nullable = false, length = 10) @Getter
+    @Setter
+    private Integer unitValue;
 
     @OneToMany
+    @ToString.Exclude
     private List<SaleProduct> saleProductDTOList;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Stock stock = (Stock) o;
+        return id != null && Objects.equals(id, stock.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
