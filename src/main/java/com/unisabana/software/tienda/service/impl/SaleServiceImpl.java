@@ -7,8 +7,6 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,55 +15,39 @@ public class SaleServiceImpl implements SaleService {
     private SaleRepository saleRepository;
 
     @Override
-    public boolean saveSale(Sale sale) {
+    public boolean save(Sale sale) {
         saleRepository.save(sale);
         return saleRepository.existsById(Math.toIntExact(sale.getId()));
     }
 
     @Override
-    public Sale readSale(int id) {
+    public Sale read(int id) {
         return saleRepository.getReferenceById(id);
     }
 
     @Override
-    public boolean deleteSale(int id) {
+    public boolean delete(int id) {
         saleRepository.deleteById(id);
         return !saleRepository.existsById(id);
     }
 
     @Override
-    public boolean limitTransaction(int documentClient) {
-        int transactionCount = 0;
+    public boolean limitTransaction(int documentClient, Date date) {
+        return saleRepository.limitTransactions(documentClient, date).size() < 3;
+    }
 
-        for(Sale s: saleRepository.findAll()) {
-            if(s.getDocumentClient().equals(documentClient) && s.getDateCreated().getDay() == LocalDate.now().getDayOfMonth()) {
-                transactionCount ++;
-            }
-        }
-
-        return transactionCount <= 3;
+    @Override
+    public Sale findByID(int id) {
+        return saleRepository.searchByID(id);
     }
 
     @Override
     public List<Sale> findByDocumentClient(int documentClient) {
-        List<Sale> sales = new ArrayList<>();
-
-        for(Sale s: saleRepository.findAll()) {
-            if(s.getDocumentClient().equals(documentClient)) {
-                sales.add(s);
-            }
-        }
-
-        return sales;
+        return saleRepository.searchByDocumentClient(documentClient);
     }
 
     @Override
     public List<Sale> findAll() {
         return saleRepository.findAll();
-    }
-
-    @Override
-    public List<Sale> findByDocumentClientAndDateCreated(int documentClient, Date valueOf) {
-        return null;
     }
 }

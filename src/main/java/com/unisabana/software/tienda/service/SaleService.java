@@ -14,13 +14,11 @@ public interface SaleService {
 
     boolean delete(int id);
 
-    boolean limitTransaction(int documentClient);
+    boolean limitTransaction(int documentClient, Date date);
 
     Sale findByID(int id);
 
     List<Sale> findByDocumentClient(int documentClient);
 
     List<Sale> findAll();
-
-    List<Sale> findByDocumentClientAndDateCreated(int documentClient, Date valueOf);
 }
