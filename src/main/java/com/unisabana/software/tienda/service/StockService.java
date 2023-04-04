@@ -5,11 +5,11 @@ import com.unisabana.software.tienda.model.Stock;
 import java.util.List;
 
 public interface StockService {
-    boolean saveStock(Stock stock);
+    boolean save(Stock stock);
 
-    Stock readStock(int id);
+    Stock read(int id);
 
-    boolean deleteStock(int id);
+    boolean delete(int id);
 
     List<Stock> findAll();
 }

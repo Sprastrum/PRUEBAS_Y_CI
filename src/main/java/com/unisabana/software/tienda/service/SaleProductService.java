@@ -5,11 +5,11 @@ import com.unisabana.software.tienda.model.SaleProduct;
 import java.util.List;
 
 public interface SaleProductService {
-    boolean saveSaleProduct(SaleProduct saleProduct);
+    boolean save(SaleProduct saleProduct);
 
-    SaleProduct readSaleProduct(int id);
+    SaleProduct read(int id);
 
-    boolean deleteSaleProduct(int id);
+    boolean delete(int id);
 
     List<SaleProduct> findAll();
 }

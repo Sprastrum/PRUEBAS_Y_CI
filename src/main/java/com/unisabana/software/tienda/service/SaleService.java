@@ -8,13 +8,15 @@ import java.util.List;
 
 @Component
 public interface SaleService {
-    boolean saveSale(Sale sale);
+    boolean save(Sale sale);
 
-    Sale readSale(int id);
+    Sale read(int id);
 
-    boolean deleteSale(int id);
+    boolean delete(int id);
 
     boolean limitTransaction(int documentClient);
+
+    Sale findByID(int id);
 
     List<Sale> findByDocumentClient(int documentClient);
 

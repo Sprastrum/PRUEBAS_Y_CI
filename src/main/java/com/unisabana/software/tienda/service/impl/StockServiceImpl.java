@@ -12,18 +12,18 @@ public class StockServiceImpl implements StockService {
     private StockRepository stockRepository;
 
     @Override
-    public boolean saveStock(Stock stock) {
+    public boolean save(Stock stock) {
         stockRepository.save(stock);
         return stockRepository.existsById(Math.toIntExact(stock.getId()));
     }
 
     @Override
-    public Stock readStock(int id) {
+    public Stock read(int id) {
         return stockRepository.getReferenceById(id);
     }
 
     @Override
-    public boolean deleteStock(int id) {
+    public boolean delete(int id) {
         stockRepository.deleteById(id);
         return !stockRepository.existsById(id);
     }

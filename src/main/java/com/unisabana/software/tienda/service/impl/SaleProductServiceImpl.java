@@ -12,18 +12,18 @@ public class SaleProductServiceImpl implements SaleProductService {
     private SaleProductRepository saleProductRepository;
 
     @Override
-    public boolean saveSaleProduct(SaleProduct saleProduct) {
+    public boolean save(SaleProduct saleProduct) {
         saleProductRepository.save(saleProduct);
         return saleProductRepository.existsById(Math.toIntExact(saleProduct.getId()));
     }
 
     @Override
-    public SaleProduct readSaleProduct(int id) {
+    public SaleProduct read(int id) {
         return saleProductRepository.getReferenceById(id);
     }
 
     @Override
-    public boolean deleteSaleProduct(int id) {
+    public boolean delete(int id) {
         saleProductRepository.deleteById(id);
         return !saleProductRepository.existsById(id);
     }
