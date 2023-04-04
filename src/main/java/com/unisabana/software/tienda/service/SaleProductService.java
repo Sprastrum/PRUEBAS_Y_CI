@@ -1,5 +1,6 @@
 package com.unisabana.software.tienda.service;
 
+import com.unisabana.software.tienda.model.Sale;
 import com.unisabana.software.tienda.model.SaleProduct;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +13,10 @@ public interface SaleProductService {
     SaleProduct read(int id);
 
     boolean delete(int id);
+
+    List<SaleProduct> findByDocumentClient(int documentClient);
+
+    int findSaleID();
 
     List<SaleProduct> findAll();
 }
