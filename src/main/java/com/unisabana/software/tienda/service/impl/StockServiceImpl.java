@@ -1,14 +1,17 @@
 package com.unisabana.software.tienda.service.impl;
 
+import com.unisabana.software.tienda.model.Sale;
 import com.unisabana.software.tienda.model.Stock;
 import com.unisabana.software.tienda.repository.StockRepository;
 import com.unisabana.software.tienda.service.StockService;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class StockServiceImpl implements StockService {
+    @Resource
     private StockRepository stockRepository;
 
     @Override
@@ -29,7 +32,17 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
+    public Stock findByID(int id) {
+        return stockRepository.searchByID(id);
+    }
+
+    @Override
     public List<Stock> findAll() {
         return stockRepository.findAll();
+    }
+
+    @Override
+    public void setQuantity(int quantity, int id) {
+        stockRepository.setQuantity(quantity, id);
     }
 }
