@@ -1,50 +1,58 @@
 package com.unisabana.software.tienda.controller;
 
 import com.unisabana.software.tienda.controller.dto.SaleDTO;
+import com.unisabana.software.tienda.model.Sale;
 import com.unisabana.software.tienda.service.SaleService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @RestController
 public class SaleController {
-    @Autowired
+    @Resource
     private SaleService service;
 
-    public SaleController(List<String> products) {
-    }
-
-    @PostMapping("/product/save")
-    public void saveTransaction(@RequestBody SaleDTO saleDTO) {
-        if(service.limitTransaction(saleDTO.getDocumentClient())) {
-            service.saveSale(saleDTO);
+    @PostMapping("/sale/saveSale")
+    public Sale saveSale(@RequestBody SaleDTO saleDTO) {
+        if(service.limitTransaction(saleDTO.getDocumentClient(), saleDTO.getDateCreated())) {
+            service.save(saleDTO.toModel());
         }
+
+        return saleDTO.toModel();
     }
 
-    @GetMapping("/product/transactions")
-    public List<SaleDTO> allTransactions() {
+    @RequestMapping(value = "/sale/saveSaleListProducts", method = RequestMethod.POST)
+    public List<Sale> saveSaleListProducts(@RequestBody List<SaleDTO> salesDTO) {
+        List<Sale> sales = new ArrayList<>();
+
+        for(SaleDTO s: salesDTO) {
+            if(service.limitTransaction(s.getDocumentClient(), s.getDateCreated())) {
+                service.save(s.toModel());
+                sales.add(s.toModel());
+            }
+        }
+
+        return sales;
+    }
+
+    @GetMapping("/sale/allSales")
+    public List<Sale> allSales() {
         return service.findAll();
     }
 
-    @GetMapping("/product/transaction/searchbyid/{ID}")
-    public List<SaleDTO> transactionSearchById(@PathVariable("ID") int documentClient) {
-        return service.findByDocumentClient(documentClient);
+    @GetMapping("/sale/searchByID/{ID}")
+    public Sale saleSearchById(@PathVariable("ID") int id) {
+        return service.findByID(id);
     }
-    @GetMapping("/product/transaction/validation/{ID}")
-    public List <SaleDTO> Validation(@PathVariable("ID") int documentClient) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate today = LocalDate.now();
-        //List <SaleDTO> sales = service.findByDocumentClientAndDateCreated(documentClient, Date.valueOf(today));
-        //if (sales.size() > 3) {
-          //  System.out.println("NO PUEDE COMPRAR MAS");
-        //}
-        //else{
-          //  System.out.println("puede seguir comprando");
-        //}
-        return service.findByDocumentClientAndDateCreated(documentClient, Date.valueOf(today));
+
+    @GetMapping("/sale/searchByDocumentClient/{DOCUMENTCLIENT}")
+    public List<Sale> saleSearchByDocumentClient(@PathVariable("DOCUMENTCLIENT") int documentClient) {
+        return service.findByDocumentClient(documentClient);
     }
 }

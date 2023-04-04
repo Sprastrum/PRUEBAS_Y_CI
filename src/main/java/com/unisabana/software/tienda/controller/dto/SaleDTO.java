@@ -1,44 +1,28 @@
 package com.unisabana.software.tienda.controller.dto;
 
-import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.Hibernate;
+import com.unisabana.software.tienda.model.Sale;
+import com.unisabana.software.tienda.model.SaleProduct;
+import lombok.Data;
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-@Entity
-@Table(name = "SALE")
+@Data
 public class SaleDTO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", length = 10) @Getter @Setter
     private Integer id;
-
-    @Column(name = "DATE_CREATED") @Getter @Setter
     private Date dateCreated;
-
-    @Column(name = "DOCUMENT_CLIENT", length = 10) @Getter @Setter
     private Integer documentClient;
-
-    @Column(name = "TOTAL_AMOUNT", length = 10) @Getter @Setter
     private Integer totalAmount;
+    private List<SaleProductDTO> saleProductDTOS = new ArrayList<>();
 
-    @OneToMany
-    @ToString.Exclude
-    private List<SaleProductDTO> saleProductDTOList;
+    public Sale toModel() {
+        List<SaleProduct> saleProducts = new ArrayList<>();
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        SaleDTO saleDTO = (SaleDTO) o;
-        return id != null && Objects.equals(id, saleDTO.id);
-    }
+        for(SaleProductDTO s: saleProductDTOS) {
+            saleProducts.add(s.toModel());
+        }
 
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
+        return new Sale(this.id, this.dateCreated, this.documentClient, this.totalAmount, saleProducts);
     }
 }

@@ -1,33 +1,29 @@
 package com.unisabana.software.tienda.controller.dto;
 
-import jakarta.persistence.*;
+import com.unisabana.software.tienda.model.SaleProduct;
+import com.unisabana.software.tienda.model.Stock;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 @Data
-@Entity
-@Table(name = "STOCK")
 public class StockDTO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false, length = 10)
     private Integer id;
-
-    @Column(name = "DATE_CREATED", nullable = false)
     private Date dateCreated;
-
-    @Column(name = "NAME", nullable = false, length = 100)
     private String name;
-
-    @Column(name = "QUANTITY", nullable = false, length = 10)
     private Integer quantity;
+    private Integer unitValue;
+    private List<SaleProductDTO> saleProductDTOS = new ArrayList<>();
 
-    @Column(name = "VALUE", nullable = false, length = 10)
-    private Integer value;
+    public Stock toModel() {
+        List<SaleProduct> saleProducts = new ArrayList<>();
 
-    @OneToMany
-    private List<SaleProductDTO> saleProductDTOList;
+        for(SaleProductDTO s: saleProductDTOS) {
+            saleProducts.add(s.toModel());
+        }
+
+        return new Stock(this.id, this.dateCreated, this.name, this.quantity, this.unitValue, saleProducts);
+    }
 }
