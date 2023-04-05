@@ -15,17 +15,24 @@ import java.util.Objects;
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", length = 10) @Getter
+    @Column(name = "ID", length = 10)
+    @Getter
     @Setter
     private Integer id;
 
-    @Column(name = "DATE_CREATED") @Getter @Setter
+    @Column(name = "DATE_CREATED")
+    @Getter
+    @Setter
     private Date dateCreated;
 
-    @Column(name = "DOCUMENT_CLIENT", length = 10) @Getter @Setter
+    @Column(name = "DOCUMENT_CLIENT", length = 10)
+    @Getter
+    @Setter
     private Integer documentClient;
 
-    @Column(name = "TOTAL_AMOUNT", length = 10) @Getter @Setter
+    @Column(name = "TOTAL_AMOUNT", length = 10)
+    @Getter
+    @Setter
     private Integer totalAmount;
 
     @OneToMany
