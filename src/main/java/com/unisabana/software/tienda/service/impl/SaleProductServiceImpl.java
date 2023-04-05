@@ -38,12 +38,7 @@ public class SaleProductServiceImpl implements SaleProductService {
 
     @Override
     public List<SaleProduct> findByDocumentClient(int documentClient) {
-        return saleProductRepository.searchByDocumentClient(documentClient);
-    }
-
-    @Override
-    public int findSaleID() {
-        return 0;
+        return saleProductRepository.searchTransactionsByDocumentClient(documentClient);
     }
 
     @Override

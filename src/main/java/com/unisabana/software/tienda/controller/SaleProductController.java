@@ -29,7 +29,14 @@ public class SaleProductController {
 
     @PostMapping("/saleProduct/saveSaleProduct")
     public SaleProduct saveSaleProduct(@RequestBody SaleProductDTO saleProductDTO) {
-        service.save(saleProductDTO.toModel());
+        if(service.limitTransaction(saleProductDTO.getSaleDTO().getDocumentClient(),
+                saleProductDTO.getSaleDTO().getDateCreated()) &&
+                saleProductDTO.getQuantity() <= saleProductDTO.getStockDTO().getQuantity()) {
+            service.save(saleProductDTO.toModel());
+        }
+
         return saleProductDTO.toModel();
     }
+
+
 }

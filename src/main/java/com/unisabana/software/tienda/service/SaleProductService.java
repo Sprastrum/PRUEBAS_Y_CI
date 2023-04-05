@@ -18,7 +18,5 @@ public interface SaleProductService {
 
     List<SaleProduct> findByDocumentClient(int documentClient);
 
-    int findSaleID();
-
     List<SaleProduct> findAll();
 }

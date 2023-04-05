@@ -1,5 +1,6 @@
 package com.unisabana.software.tienda.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,7 +11,8 @@ import lombok.*;
 public class SaleProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", length = 10) @Getter
+    @Column(name = "ID", length = 10)
+    @Getter
     @Setter
     private Integer id;
 
@@ -20,6 +22,7 @@ public class SaleProduct {
     private Integer product;
     @ManyToOne
     @JoinColumn(name = "PRODUCT")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @Getter
     @Setter
     private Stock stock;
@@ -35,6 +38,7 @@ public class SaleProduct {
     private Integer saleID;
     @ManyToOne
     @JoinColumn(name = "SALE_ID")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @Getter
     @Setter
     private Sale sale;
