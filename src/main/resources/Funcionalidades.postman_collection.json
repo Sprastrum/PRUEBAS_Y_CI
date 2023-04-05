@@ -1,134 +1,267 @@
 {
 	"info": {
-		"_postman_id": "4dc4d26e-13a1-425f-a9f2-0d985b52f4e3",
-		"name": "Funcionalidades",
+		"_postman_id": "9d4bf92f-8875-4679-91e2-dd43b64bf736",
+		"name": "JPA",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "26155053"
+		"_exporter_id": "26132482"
 	},
 	"item": [
 		{
-			"name": "ProductTransactions",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Sale",
+			"item": [
+				{
+					"name": "Sale Save",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
 						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8081/product/transactions",
-					"protocol": "http",
-					"host": [
-						"localhost"
 					],
-					"port": "8081",
-					"path": [
-						"product",
-						"transactions"
-					]
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dateCreated\": \"2023-04-06\",\r\n    \"documentClient\": 123456,\r\n    \"totalAmount\": 2000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/sale/saveSale",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"sale",
+								"saveSale"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sales Save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"dateCreated\": \"2023-04-08\",\r\n        \"documentClient\": 123456,\r\n        \"totalAmount\": 2000\r\n    },\r\n    {\r\n        \"dateCreated\": \"2023-04-07\",\r\n        \"documentClient\": 123456,\r\n        \"totalAmount\": 2000\r\n    },\r\n    {\r\n        \"dateCreated\": \"2023-04-07\",\r\n        \"documentClient\": 123456,\r\n        \"totalAmount\": 2000\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/sale/saveSaleListProducts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"sale",
+								"saveSaleListProducts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sale Search by Document Client",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/sale/searchByDocumentClient/123456",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"sale",
+								"searchByDocumentClient",
+								"123456"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Sales",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/sale/allSales",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"sale",
+								"allSales"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sale Search by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/sale/searchByID/98",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"sale",
+								"searchByID",
+								"98"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "ProductSearchByID",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"jabon\",\r\n    \"price\" : 3000,\r\n    \"stock\" : 4\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "SaleProduct",
+			"item": [
+				{
+					"name": "SaleProducts Save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\": 1,\r\n    \"stockDTO\": {\r\n        \"id\": 1,\r\n        \"dateCreated\": \"2023-03-23T05:00:00.000+00:00\",\r\n        \"name\": \"Gansito\",\r\n        \"quantity\": 1133,\r\n        \"unitValue\": 2000\r\n    },\r\n    \"quantity\": 1,\r\n    \"saleID\": 18,\r\n    \"saleDTO\": {\r\n        \"id\": 18,\r\n        \"dateCreated\": \"2023-03-21T05:00:00.000+00:00\",\r\n        \"documentClient\": 1234,\r\n        \"totalAmount\": 200\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/saleProduct/saveSaleProduct",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"saleProduct",
+								"saveSaleProduct"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8081/product/transaction/searchbyid/111",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8081",
-					"path": [
-						"product",
-						"transaction",
-						"searchbyid",
-						"111"
-					]
+				{
+					"name": "All Transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/saleProduct/allSalesProducts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"saleProduct",
+								"allSalesProducts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transactions by Document Client",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/saleProduct/salesProductsByDocumentClient/1234",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"saleProduct",
+								"salesProductsByDocumentClient",
+								"1234"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "ProductValidation",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"jabon\",\r\n    \"price\" : 3000,\r\n    \"stock\" : 4\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Stock",
+			"item": [
+				{
+					"name": "Stock Set Quantity",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/stock/setQuantity/10&100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"stock",
+								"setQuantity",
+								"10&100"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8081/product/transaction/validation/111",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8081",
-					"path": [
-						"product",
-						"transaction",
-						"validation",
-						"111"
-					]
+				{
+					"name": "All Stocks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/stock/allStocks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"stock",
+								"allStocks"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "ProductSave",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:8081/product/save",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8081",
-					"path": [
-						"product",
-						"save"
-					]
-				}
-			},
-			"response": []
+			]
 		}
 	]
 }

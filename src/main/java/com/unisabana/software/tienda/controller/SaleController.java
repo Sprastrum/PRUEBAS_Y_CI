@@ -55,4 +55,11 @@ public class SaleController {
     public List<Sale> saleSearchByDocumentClient(@PathVariable("DOCUMENTCLIENT") int documentClient) {
         return service.findByDocumentClient(documentClient);
     }
+
+    @GetMapping("/sale/searchID/{DOCUMENT_CLIENT}")
+    public List<Sale> searchSaleID(@PathVariable("DOCUMENT_CLIENT") int documentClient) {
+        return service.findByDocumentClient(documentClient);
+    }
+
+
 }

@@ -15,23 +15,28 @@ import java.util.Objects;
 public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false, length = 10) @Getter
+    @Column(name = "ID", nullable = false, length = 10)
+    @Getter
     @Setter
     private Integer id;
 
-    @Column(name = "DATE_CREATED", nullable = false) @Getter
+    @Column(name = "DATE_CREATED", nullable = false)
+    @Getter
     @Setter
     private Date dateCreated;
 
-    @Column(name = "NAME", nullable = false, length = 100) @Getter
+    @Column(name = "NAME", nullable = false, length = 100)
+    @Getter
     @Setter
     private String name;
 
-    @Column(name = "QUANTITY", nullable = false, length = 10) @Getter
+    @Column(name = "QUANTITY", nullable = false, length = 10)
+    @Getter
     @Setter
     private Integer quantity;
 
-    @Column(name = "UNIT_VALUE", nullable = false, length = 10) @Getter
+    @Column(name = "UNIT_VALUE", nullable = false, length = 10)
+    @Getter
     @Setter
     private Integer unitValue;
 
