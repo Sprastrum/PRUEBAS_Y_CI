@@ -1,11 +1,7 @@
 package com.example.demo.service;
 
 import com.unisabana.software.tienda.model.Sale;
-import com.unisabana.software.tienda.model.Sale;
 import com.unisabana.software.tienda.repository.SaleRepository;
-import com.unisabana.software.tienda.repository.SaleRepository;
-import com.unisabana.software.tienda.service.impl.SaleProductServiceImpl;
-import com.unisabana.software.tienda.service.impl.SaleServiceImpl;
 import com.unisabana.software.tienda.service.impl.SaleServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -54,7 +50,7 @@ public class SaleServiceTest {
     @Test
     public void Given_An_id_To_Delete_A_sale_When_Invoke_delete_Then_Return_Boolean_True() {
         int id = 2;
-        Mockito.when(saleRepository.existsById(id)).thenReturn(true);
+        Mockito.when(saleRepository.existsById(id)).thenReturn(false);
         boolean result = saleService.delete(id);
         assertTrue(result);
         Mockito.verify(saleRepository).deleteById(id);
@@ -92,17 +88,17 @@ public class SaleServiceTest {
         boolean result = saleService.limitTransaction(documentClient, today);
         assertFalse(result);
         Mockito.verify(saleRepository).limitTransactions(documentClient, today);
-}
+    }
 
     @Test // que grabe y devuelva true
     public void Given_An_ID_to_Search_A_Sale_When_Invoke_findById_Then_Return_Sale() {
         Date today = new Date();
         int id = 2;
-        Sale sale1 = new Sale(id,today,2,30,null);
-        Sale expectedsale = new Sale(id,today ,2,30,null);
+        Sale sale1 = new Sale(id, today, 2, 30, null);
+        Sale expectedsale = new Sale(id, today, 2, 30, null);
         Mockito.when(saleRepository.searchByID(id)).thenReturn(sale1);
         Sale result = saleService.findByID(id);
-        assertEquals(expectedsale,result);
+        assertEquals(expectedsale, result);
         Mockito.verify(saleRepository).searchByID(id);
     }
 
