@@ -4,12 +4,16 @@ import com.unisabana.software.tienda.model.SaleProduct;
 import com.unisabana.software.tienda.repository.SaleProductRepository;
 import com.unisabana.software.tienda.service.SaleProductService;
 import jakarta.annotation.Resource;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.util.List;
 
 @Service
+@Component
+@AllArgsConstructor
 public class SaleProductServiceImpl implements SaleProductService {
     @Resource
     private SaleProductRepository saleProductRepository;

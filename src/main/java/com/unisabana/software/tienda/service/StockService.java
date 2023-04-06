@@ -2,10 +2,12 @@ package com.unisabana.software.tienda.service;
 
 import com.unisabana.software.tienda.model.Stock;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Component
+@Service
 public interface StockService {
     boolean save(Stock stock);
 

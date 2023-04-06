@@ -4,12 +4,14 @@ import com.unisabana.software.tienda.model.SaleProduct;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
 import java.util.List;
 
 @Repository
+@Component
 public interface SaleProductRepository extends JpaRepository<SaleProduct, Integer> {
     @Query(value = "SELECT p.* FROM SALE s, SALE_PRODUCT p WHERE p.SALE_ID = :saleID AND s.DATE_CREATED = :today",
             nativeQuery = true)

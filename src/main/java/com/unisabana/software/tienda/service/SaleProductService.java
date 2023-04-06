@@ -2,11 +2,13 @@ package com.unisabana.software.tienda.service;
 
 import com.unisabana.software.tienda.model.SaleProduct;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.util.List;
 
 @Component
+@Service
 public interface SaleProductService {
     boolean save(SaleProduct saleProduct);
 
