@@ -26,8 +26,8 @@ public class StockIntegrationTest extends AbstractTest {
     private static final String PATH_SEARCH_SALES_BY_ID = "/sale/searchByID/{ID}";
     private static final String PATH_SEARCH_SALES_BY_DOCUMENT_CLIENT = "/sale/searchByDocumentClient/{DOCUMENT_CLIENT}";
     private static final String PATH_ALL_STOCKS = "/stock/allStocks";
-
-    void setUp() {
+@BeforeEach
+void setUp() {
         stockDTO.setId(123);
         stockDTO.setDateCreated(new Date(2023- 5 - 7));
         stockDTO.setName("Hamburguesa");
@@ -48,16 +48,12 @@ public class StockIntegrationTest extends AbstractTest {
 
     @Test
     void Given_Need_Save_Stock_When_Invoke_saveStock_Then_Return_Positive_Response() {
-        setUp();
-
         Assertions.assertEquals("Se ha guardado exitosamente.",
                 testRestTemplate.postForEntity(PATH_STOCK_SAVE, stockDTO, ResponseDTO.class).getBody().getResponse());
     }
 
     @Test
     void Given_Need_All_Sales_When_Invoke_allSales_Then_Return_All_Sales_List() {
-        setUp();
-
         testRestTemplate.postForEntity(PATH_STOCK_SAVE, stockDTO1, ResponseDTO.class);
         Assertions.assertNotNull(testRestTemplate.getForEntity(PATH_ALL_STOCKS, List.class).getBody());
     }

@@ -13,6 +13,7 @@ import com.unisabana.software.tienda.model.SaleProduct;
 import com.unisabana.software.tienda.service.SaleProductService;
 import com.unisabana.software.tienda.service.SaleService;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -50,8 +51,8 @@ public class SaleProductIntegrationTest extends AbstractTest {
     private static final String PATH_ALL_TRANSACTIONS = "/saleProduct/allSalesProducts";
 
     private String DOCUMENT_CLIENT;
-
-    private void setUp() {
+    @BeforeEach
+    void setUp() {
         saleDTO.setId(18);
         saleDTO.setDocumentClient(123);
         stockDTO.setId(1);
@@ -81,15 +82,11 @@ public class SaleProductIntegrationTest extends AbstractTest {
 
     @Test
     void Given_Need_All_Transactions_When_Invoke_allTransactions_Then_Return_All_Transactions() {
-        setUp();
-        testRestTemplate.postForEntity(PATH_SALE_PRODUCT_SAVE, saleProductDTO, ResponseDTO.class);
         Assertions.assertNotNull(testRestTemplate.postForEntity(PATH_ALL_TRANSACTIONS, null, Sale.class).getBody());
     }
 
     @Test
     void Given_Need_Sales_All_With_Same_Document_Client_When_Invoke_saleSearchByDocumentClient_Then_Return_All_Sales_List_Same_Document_Client() {
-        setUp();
-
         testRestTemplate.postForEntity(PATH_SALE_PRODUCT_SAVE, saleProductDTO1, ResponseDTO.class);
         ResponseEntity<List<SaleProduct>> response = testRestTemplate.exchange(PATH_SEARCH_TRANSACTIONS_BY_DOCUMENT_CLIENT,
                 HttpMethod.GET, request, new ParameterizedTypeReference<List<SaleProduct>>() {}, DOCUMENT_CLIENT);
@@ -103,8 +100,6 @@ public class SaleProductIntegrationTest extends AbstractTest {
 
     @Test
     void Given_Need_Save_Sale_Product_When_Invoke_saveSaleProduct_Then_Return_Positive_Response() {
-        setUp();
-
         Assertions.assertEquals("Se ha guardado exitosamente.",
                 testRestTemplate.postForEntity(PATH_SALE_PRODUCT_SAVE, saleProductDTO2, ResponseDTO.class).getBody().getResponse());
     }
