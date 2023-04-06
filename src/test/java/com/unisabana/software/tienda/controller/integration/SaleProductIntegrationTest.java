@@ -53,20 +53,28 @@ public class SaleProductIntegrationTest extends AbstractTest {
 
     private void setUp() {
         saleDTO.setId(18);
-
+        saleDTO.setDocumentClient(123);
         stockDTO.setId(1);
+        stockDTO.setQuantity(100);
 
         saleProductDTO.setProduct(1);
         saleProductDTO.setQuantity(100);
         saleProductDTO.setSaleID(18);
+        saleProductDTO.setSaleDTO(saleDTO);
+        saleProductDTO.setStockDTO(stockDTO);
 
         saleProductDTO1.setProduct(1);
         saleProductDTO1.setQuantity(100);
         saleProductDTO1.setSaleID(18);
+        saleProductDTO1.setSaleDTO(saleDTO);
+        saleProductDTO1.setStockDTO(stockDTO);
+
 
         saleProductDTO2.setProduct(1);
         saleProductDTO2.setQuantity(100);
         saleProductDTO2.setSaleID(18);
+        saleProductDTO2.setSaleDTO(saleDTO);
+        saleProductDTO2.setStockDTO(stockDTO);
 
         saleProductController.saveSaleProduct(saleProductDTO1);
     }
@@ -74,7 +82,6 @@ public class SaleProductIntegrationTest extends AbstractTest {
     @Test
     void Given_Need_All_Transactions_When_Invoke_allTransactions_Then_Return_All_Transactions() {
         setUp();
-
         testRestTemplate.postForEntity(PATH_SALE_PRODUCT_SAVE, saleProductDTO, ResponseDTO.class);
         Assertions.assertNotNull(testRestTemplate.postForEntity(PATH_ALL_TRANSACTIONS, null, Sale.class).getBody());
     }
