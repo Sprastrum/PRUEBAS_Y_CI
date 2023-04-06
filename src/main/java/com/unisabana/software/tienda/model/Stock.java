@@ -47,13 +47,13 @@ public class Stock {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Stock stock = (Stock) o;
-        return id != null && Objects.equals(id, stock.id);
+        return Objects.equals(id, stock.id) && Objects.equals(dateCreated, stock.dateCreated) && Objects.equals(name, stock.name) && Objects.equals(quantity, stock.quantity) && Objects.equals(unitValue, stock.unitValue) && Objects.equals(saleProductDTOList, stock.saleProductDTOList);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(id, dateCreated, name, quantity, unitValue, saleProductDTOList);
     }
 }
