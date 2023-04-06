@@ -17,6 +17,7 @@ public class SaleProductServiceImpl implements SaleProductService {
     @Override
     public boolean save(SaleProduct saleProduct) {
         saleProductRepository.save(saleProduct);
+
         return saleProductRepository.existsById(Math.toIntExact(saleProduct.getId()));
     }
 

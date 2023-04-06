@@ -18,34 +18,37 @@ public class StockServiceTest {
     @InjectMocks
     private StockServiceImpl stockService;
     @Mock
-    StockRepository stockRepository;
+    private StockRepository stockRepository;
 
-    @Test // que grabe y devuelva true
+    @Test
     public void Given_ProductStock_When_Invoke_saveStock_Then_Return_Boolean_True(){
         int id = 2;
         Date today = new Date();
         Stock product1 = new Stock(id, today, "jabon", 2, 30, null);
         Mockito.when(stockRepository.existsById(id)).thenReturn(true);
-        stockService.save(product1);
+        boolean result = stockService.save(product1);
+        assertTrue(result);
         Mockito.verify(stockRepository).save(product1);
         Mockito.verify(stockRepository).existsById(id);
     }
     @Test
-    public void Given_A_Read_Of_A_Stock_When_Invoke_read_Then_Return_Boolean_True() {
+    public void Given_A_Read_Of_A_Stock_When_Invoke_read_Then_Return_Product() {
         int id = 2;
         Date today = new Date();
         Stock product1 = new Stock(id, today, "jabon", 2, 30, null);
         Mockito.when(stockRepository.getReferenceById(id)).thenReturn(product1);
-        stockService.read(id);
+        Stock result = stockService.read(id);
+        assertEquals(product1, result);
         Mockito.verify(stockRepository).getReferenceById(id);
     }
     @Test
     public void Given_An_id_To_Delete_A_Stock_When_Invoke_delete_Then_Return_Boolean_True(){
         int id = 2;
-        Mockito.when(stockRepository.existsById(id)).thenReturn(true);
-        stockService.delete(id);
-        Mockito.verify(stockRepository).deleteById(id);
+        Mockito.when(stockRepository.existsById(id)).thenReturn(false);
+        boolean result = stockService.delete(id);
+        assertTrue(result);
         Mockito.verify(stockRepository).existsById(id);
+        Mockito.verify(stockRepository).deleteById(id);
     }
     @Test
     public void Given_An_id_To_Delete_A_Stock_When_Invoke_delete_Then_Return_Boolean_False(){

@@ -42,13 +42,13 @@ public class Sale {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Sale sale = (Sale) o;
-        return id != null && Objects.equals(id, sale.id);
+        return Objects.equals(id, sale.id) && Objects.equals(dateCreated, sale.dateCreated) && Objects.equals(documentClient, sale.documentClient) && Objects.equals(totalAmount, sale.totalAmount) && Objects.equals(saleProductList, sale.saleProductList);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(id, dateCreated, documentClient, totalAmount, saleProductList);
     }
 }
