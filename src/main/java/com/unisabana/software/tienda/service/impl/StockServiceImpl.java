@@ -4,11 +4,15 @@ import com.unisabana.software.tienda.model.Stock;
 import com.unisabana.software.tienda.repository.StockRepository;
 import com.unisabana.software.tienda.service.StockService;
 import jakarta.annotation.Resource;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
+@NoArgsConstructor
 public class StockServiceImpl implements StockService {
     @Resource
     private StockRepository stockRepository;

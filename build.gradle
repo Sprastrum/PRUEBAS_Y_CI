@@ -28,8 +28,12 @@ test {
 	useJUnitPlatform()
 	finalizedBy jacocoTestReport
 }
-jacocoTestReport {
-	dependsOn test // tests are required to run before generating the report
+jacocoTestReport{
+	reports{
+		html.enabled(true)
+		xml.enabled(true)
+		csv.enabled(true)
+	}
 
 	afterEvaluate {
 		classDirectories.setFrom(files(classDirectories.files.collect {
@@ -44,9 +48,12 @@ jacocoTestReport {
 	}
 }
 
+test.finalizedBy(jacocoTestReport)
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'junit:junit:4.13.2'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'

@@ -2,7 +2,6 @@ package com.unisabana.software.tienda.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import java.util.Date;
 import java.util.List;
@@ -44,7 +43,9 @@ public class Sale {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Sale sale = (Sale) o;
-        return Objects.equals(id, sale.id) && Objects.equals(dateCreated, sale.dateCreated) && Objects.equals(documentClient, sale.documentClient) && Objects.equals(totalAmount, sale.totalAmount) && Objects.equals(saleProductList, sale.saleProductList);
+        return Objects.equals(id, sale.id) && Objects.equals(dateCreated, sale.dateCreated) &&
+                Objects.equals(documentClient, sale.documentClient) && Objects.equals(totalAmount, sale.totalAmount)
+                && Objects.equals(saleProductList, sale.saleProductList);
     }
 
     @Override

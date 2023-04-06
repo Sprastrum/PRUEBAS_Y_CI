@@ -2,13 +2,17 @@ package com.unisabana.software.tienda.controller.dto;
 
 import com.unisabana.software.tienda.model.Sale;
 import com.unisabana.software.tienda.model.SaleProduct;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class SaleDTO {
     private Integer id;
     private Date dateCreated;

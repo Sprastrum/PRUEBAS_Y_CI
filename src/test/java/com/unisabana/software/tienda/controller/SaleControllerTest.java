@@ -1,57 +1,60 @@
 package com.unisabana.software.tienda.controller;
 
-import com.unisabana.software.tienda.controller.SaleController;
-import com.unisabana.software.tienda.controller.SaleProductController;
-import com.unisabana.software.tienda.controller.dto.SaleDTO;
+import com.unisabana.software.tienda.controller.dto.ResponseDTO;
+import com.unisabana.software.tienda.controller.dto.SaleProductDTO;
 import com.unisabana.software.tienda.model.Sale;
 import com.unisabana.software.tienda.model.SaleProduct;
 import com.unisabana.software.tienda.model.Stock;
-import com.unisabana.software.tienda.service.SaleProductService;
 import com.unisabana.software.tienda.service.SaleService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import com.unisabana.software.tienda.controller.dto.SaleDTO;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockitoExtension.class)
 public class SaleControllerTest {
     @Mock
     private Stock stock;
     @Mock
-    private Sale sale;
+    private List<SaleProductDTO> saleProducts;
 
     private List<Sale> saleList() {
         List<Sale> saleProductList = new ArrayList<>();
         Sale sale = new Sale();
-        sale.setId(1);
-        //sale.setDateCreated(new Date(23-23-22);
-        sale.setDocumentClient(123);
+        sale.setDateCreated(new Date(2023 - 04 - 07));
+        sale.setDocumentClient((int) (Math.random() * 10000));
         sale.setTotalAmount(2);
         return saleList();
     }
-    @Mock
-    SaleService saleService;
-    @InjectMocks
-    SaleController saleController;
 
-    @Test //que grabe y devuelva un true
-    public void Given_A_Product_When_Invoke_saveSaleProduct_Then_Return_Boolean_True() {
-        Mockito.when(saleService.save(sale)).thenReturn(true);
-        //boolean result = saleController.saveSale();
-        //assertTrue(true,result);
-        //Mockito.verify(saleProductService).save(saleProduct);
+    @Mock
+    private SaleService saleService;
+
+    @InjectMocks
+    private SaleController saleController;
+
+    @Test
+    public void Given_Need_Save_Sale_When_Invoke_saveSale_Then_Return_Response_Positive() {
+        SaleDTO saleDTO = new SaleDTO(555, new Date(2023-04-07), (int)(Math.random()*10000), 100, saleProducts);
+        Mockito.when(saleService.save(new Sale())).thenReturn(true);
+        ResponseDTO result = saleController.saveSale(saleDTO);
+        Assertions.assertEquals("Se ha guardado exitosamente.", result.getResponse());
+        Mockito.verify(saleService).save(new Sale());
     }
+
     @Test // que grabe y devuelva true
     public void Given_ProductStock_When_Invoke_saveStock_Then_Return_Boolean_True(){
-    }
-    @Test
-    public void Given_A_Read_Of_A_sale_When_Invoke_read_Then_Return_Boolean_True(){
     }
     @Test
     public void Given_An_id_To_Delete_A_sale_When_Invoke_delete_Then_Return_Boolean_True(){
@@ -68,5 +71,4 @@ public class SaleControllerTest {
     @Test // que grabe y devuelva true
     public void Given_A_Search_Of_All_Sales_When_Invoke_findAll_Then_Return_Boolean_True(){
     }
-
 }

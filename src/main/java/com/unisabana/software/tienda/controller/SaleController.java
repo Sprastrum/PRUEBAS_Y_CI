@@ -1,5 +1,6 @@
 package com.unisabana.software.tienda.controller;
 
+import com.unisabana.software.tienda.controller.dto.ResponseDTO;
 import com.unisabana.software.tienda.controller.dto.SaleDTO;
 import com.unisabana.software.tienda.model.Sale;
 import com.unisabana.software.tienda.service.SaleService;
@@ -19,26 +20,31 @@ public class SaleController {
     private SaleService service;
 
     @PostMapping("/sale/saveSale")
-    public Sale saveSale(@RequestBody SaleDTO saleDTO) {
+    public ResponseDTO saveSale(@RequestBody SaleDTO saleDTO) {
         if(service.limitTransaction(saleDTO.getDocumentClient(), saleDTO.getDateCreated())) {
             service.save(saleDTO.toModel());
+            return new ResponseDTO("Se ha guardado exitosamente.");
         }
 
-        return saleDTO.toModel();
+        return new ResponseDTO("No se ha guardado.");
     }
 
     @RequestMapping(value = "/sale/saveSaleListProducts", method = RequestMethod.POST)
-    public List<Sale> saveSaleListProducts(@RequestBody List<SaleDTO> salesDTO) {
+    public List<ResponseDTO> saveSaleListProducts(@RequestBody List<SaleDTO> salesDTOS) {
         List<Sale> sales = new ArrayList<>();
+        List<ResponseDTO> results = new ArrayList<>();
 
-        for(SaleDTO s: salesDTO) {
+        for(SaleDTO s: salesDTOS) {
             if(service.limitTransaction(s.getDocumentClient(), s.getDateCreated())) {
                 service.save(s.toModel());
                 sales.add(s.toModel());
+                results.add(new ResponseDTO("Se ha guardado exitosamente."));
+            } else {
+                results.add(new ResponseDTO("No se ha guardado."));
             }
         }
 
-        return sales;
+        return results;
     }
 
     @GetMapping("/sale/allSales")
@@ -51,15 +57,8 @@ public class SaleController {
         return service.findByID(id);
     }
 
-    @GetMapping("/sale/searchByDocumentClient/{DOCUMENTCLIENT}")
-    public List<Sale> saleSearchByDocumentClient(@PathVariable("DOCUMENTCLIENT") int documentClient) {
+    @GetMapping("/sale/searchByDocumentClient/{DOCUMENT_CLIENT}")
+    public List<Sale> saleSearchByDocumentClient(@PathVariable("DOCUMENT_CLIENT") int documentClient) {
         return service.findByDocumentClient(documentClient);
     }
-
-    @GetMapping("/sale/searchID/{DOCUMENT_CLIENT}")
-    public List<Sale> searchSaleID(@PathVariable("DOCUMENT_CLIENT") int documentClient) {
-        return service.findByDocumentClient(documentClient);
-    }
-
-
 }

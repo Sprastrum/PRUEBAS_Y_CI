@@ -1,9 +1,13 @@
 package com.unisabana.software.tienda.controller.dto;
 
 import com.unisabana.software.tienda.model.SaleProduct;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class SaleProductDTO {
     private Integer id;
     private Integer product;

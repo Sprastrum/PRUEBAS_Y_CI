@@ -1,5 +1,6 @@
 package com.unisabana.software.tienda.controller;
 
+import com.unisabana.software.tienda.controller.dto.ResponseDTO;
 import com.unisabana.software.tienda.controller.dto.SaleProductDTO;
 import com.unisabana.software.tienda.model.SaleProduct;
 import com.unisabana.software.tienda.service.SaleProductService;
@@ -28,15 +29,14 @@ public class SaleProductController {
     }
 
     @PostMapping("/saleProduct/saveSaleProduct")
-    public SaleProduct saveSaleProduct(@RequestBody SaleProductDTO saleProductDTO) {
+    public ResponseDTO saveSaleProduct(@RequestBody SaleProductDTO saleProductDTO) {
         if(service.limitTransaction(saleProductDTO.getSaleDTO().getDocumentClient(),
                 saleProductDTO.getSaleDTO().getDateCreated()) &&
                 saleProductDTO.getQuantity() <= saleProductDTO.getStockDTO().getQuantity()) {
             service.save(saleProductDTO.toModel());
+            return new ResponseDTO("Se ha guardado exitosamente.");
         }
 
-        return saleProductDTO.toModel();
+        return new ResponseDTO("No se ha guardado.");
     }
-
-
 }
