@@ -5,7 +5,6 @@ import com.unisabana.software.tienda.repository.SaleProductRepository;
 import com.unisabana.software.tienda.service.SaleProductService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
-
 import java.sql.Date;
 import java.util.List;
 
