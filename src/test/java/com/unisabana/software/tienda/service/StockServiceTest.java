@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.unisabana.software.tienda.service;
 import com.unisabana.software.tienda.model.Stock;
 import com.unisabana.software.tienda.repository.StockRepository;
 import com.unisabana.software.tienda.service.impl.StockServiceImpl;

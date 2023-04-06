@@ -1,4 +1,4 @@
-package com.example.demo.integration.controller;
+package com.unisabana.software.tienda.controller;
 
 import com.unisabana.software.tienda.controller.SaleProductController;
 import com.unisabana.software.tienda.model.Sale;
