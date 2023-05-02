@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.unisabana.software.tienda.service;
 
 import com.unisabana.software.tienda.model.SaleProduct;
 import com.unisabana.software.tienda.repository.SaleProductRepository;
@@ -26,7 +26,7 @@ public class SaleProductServiceTest {
     private SaleProductServiceImpl saleProductService;
 
     @Test //que grabe y devuelva un true
-    public void Given_A_saleProduct_When_Invoke_save_Then_Return_Boolean_True() {
+    void Given_A_saleProduct_When_Invoke_save_Then_Return_Boolean_True() {
         int id = 2;
         SaleProduct saleProduct1 = new SaleProduct(id, 2, null, 2, 30, null);
         Mockito.when(saleProductRepository.existsById(id)).thenReturn(true);
@@ -37,7 +37,7 @@ public class SaleProductServiceTest {
     }
 
     @Test // que grabe y devuelva true
-    public void Given_An_Id_To_Read_A_SaleProduct_When_Invoke_read_Then_Return_SaleProduct() {
+    void Given_An_Id_To_Read_A_SaleProduct_When_Invoke_read_Then_Return_SaleProduct() {
         int id = 2;
         Date today = new Date();
         SaleProduct saleProduct1 = new SaleProduct(id, 2, null, 2, 30, null);
@@ -48,7 +48,7 @@ public class SaleProductServiceTest {
     }
 
     @Test
-    public void Given_An_id_To_Delete_A_sale_When_Invoke_delete_Then_Return_Boolean_True() {
+    void Given_An_id_To_Delete_A_sale_When_Invoke_delete_Then_Return_Boolean_True() {
         int id = 2;
         Mockito.when(saleProductRepository.existsById(id)).thenReturn(false);
         boolean result = saleProductService.delete(id);
@@ -58,7 +58,7 @@ public class SaleProductServiceTest {
     }
 
     @Test
-    public void Given_A_documentClient_And_A_Date_To_Verify_The_Limit_Of_Transactions_Of_2Sales_When_Invoke_limitTransaction_Then_Return_Boolean_True() {
+    void Given_A_documentClient_And_A_Date_To_Verify_The_Limit_Of_Transactions_Of_2Sales_When_Invoke_limitTransaction_Then_Return_Boolean_True() {
         int documentClient = 123;
         java.sql.Date today = new java.sql.Date(2023, 2, 22);
         List<SaleProduct> saleProductList = new ArrayList<>();
@@ -73,7 +73,7 @@ public class SaleProductServiceTest {
     }
 
     @Test // que grabe y devuelva true
-    public void Given_A_documentClient_to_Search_A_SaleProduct_When_Invoke_findByDocumentClient_Then_Return_Boolean_True() {
+    void Given_A_documentClient_to_Search_A_SaleProduct_When_Invoke_findByDocumentClient_Then_Return_Boolean_True() {
         int documentClient = 123;
         java.sql.Date today = new java.sql.Date(2023, 2, 22);
         List<SaleProduct> saleProductList = new ArrayList<>();
@@ -90,7 +90,7 @@ public class SaleProductServiceTest {
     }
 
     @Test // que grabe y devuelva true
-    public void Given_A_Search_Of_All_Sales_When_Invoke_findAll_Then_Return_Boolean_True() {
+    void Given_A_Search_Of_All_Sales_When_Invoke_findAll_Then_Return_Boolean_True() {
         int documentClient = 123;
         java.sql.Date today = new java.sql.Date(2023, 2, 22);
         List<SaleProduct> saleProductList = new ArrayList<>();
@@ -105,5 +105,4 @@ public class SaleProductServiceTest {
         assertTrue(saleProductList.containsAll(result));
         Mockito.verify(saleProductRepository).findAll();
     }
-
 }

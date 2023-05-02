@@ -51,6 +51,7 @@ public class SaleProductIntegrationTest extends AbstractTest {
     private static final String PATH_ALL_TRANSACTIONS = "/saleProduct/allSalesProducts";
 
     private String DOCUMENT_CLIENT;
+
     @BeforeEach
     void setUp() {
         saleDTO.setId(18);

@@ -26,6 +26,7 @@ public class StockIntegrationTest extends AbstractTest {
     private static final String PATH_SEARCH_SALES_BY_ID = "/sale/searchByID/{ID}";
     private static final String PATH_SEARCH_SALES_BY_DOCUMENT_CLIENT = "/sale/searchByDocumentClient/{DOCUMENT_CLIENT}";
     private static final String PATH_ALL_STOCKS = "/stock/allStocks";
+
 @BeforeEach
 void setUp() {
         stockDTO.setId(123);

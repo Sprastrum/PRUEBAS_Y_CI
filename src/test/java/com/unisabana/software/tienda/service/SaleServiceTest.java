@@ -25,7 +25,7 @@ public class SaleServiceTest {
     private Sale sale1;
 
     @Test //que grabe y devuelva un true
-    public void Given_A_Product_When_Invoke_saveSaleProduct_Then_Return_Boolean_True() {
+    void Given_A_Product_When_Invoke_saveSaleProduct_Then_Return_Boolean_True() {
         int id = 2;
         Date today = new Date();
         Sale sale1 = new Sale(id, today, 2, 30, null);
@@ -37,7 +37,7 @@ public class SaleServiceTest {
     }
 
     @Test // que grabe y devuelva true
-    public void Given_An_Id_To_Read_A_Sale_When_Invoke_read_Then_Return_Product() {
+    void Given_An_Id_To_Read_A_Sale_When_Invoke_read_Then_Return_Product() {
         int id = 2;
         Date today = new Date();
         Sale sale1 = new Sale(id, today, 2, 30, null);
@@ -48,7 +48,7 @@ public class SaleServiceTest {
     }
 
     @Test
-    public void Given_An_id_To_Delete_A_sale_When_Invoke_delete_Then_Return_Boolean_True() {
+    void Given_An_id_To_Delete_A_sale_When_Invoke_delete_Then_Return_Boolean_True() {
         int id = 2;
         Mockito.when(saleRepository.existsById(id)).thenReturn(false);
         boolean result = saleService.delete(id);
@@ -58,7 +58,7 @@ public class SaleServiceTest {
     }
 
     @Test
-    public void Given_A_documentClient_And_A_Date_To_Verify_The_Limit_Of_Transactions_Of_2Sales_When_Invoke_limitTransaction_Then_Return_Boolean_True() {
+    void Given_A_documentClient_And_A_Date_To_Verify_The_Limit_Of_Transactions_Of_2Sales_When_Invoke_limitTransaction_Then_Return_Boolean_True() {
         int documentClient = 123;
         java.sql.Date today = new java.sql.Date(2023, 2, 22);
         List<Sale> saleList = new ArrayList<>();
@@ -73,7 +73,7 @@ public class SaleServiceTest {
     }
 
     @Test
-    public void Given_A_documentClient_And_A_Date_To_Verify_The_Limit_Of_Transactions_Of_4Sales_When_Invoke_limitTransaction_Then_Return_Boolean_False() {
+    void Given_A_documentClient_And_A_Date_To_Verify_The_Limit_Of_Transactions_Of_4Sales_When_Invoke_limitTransaction_Then_Return_Boolean_False() {
         int documentClient = 123;
         java.sql.Date today = new java.sql.Date(2023, 2, 22);
         List<Sale> saleList = new ArrayList<>();
@@ -91,7 +91,7 @@ public class SaleServiceTest {
     }
 
     @Test // que grabe y devuelva true
-    public void Given_An_ID_to_Search_A_Sale_When_Invoke_findById_Then_Return_Sale() {
+    void Given_An_ID_to_Search_A_Sale_When_Invoke_findById_Then_Return_Sale() {
         Date today = new Date();
         int id = 2;
         Sale sale1 = new Sale(id, today, 2, 30, null);
@@ -103,7 +103,7 @@ public class SaleServiceTest {
     }
 
     @Test // que grabe y devuelva true
-    public void Given_A_documentClient_to_Search_A_Sale_When_Invoke_findByDocumentClient_Then_Return_Boolean_True() {
+    void Given_A_documentClient_to_Search_A_Sale_When_Invoke_findByDocumentClient_Then_Return_Boolean_True() {
         int documentClient = 123;
         java.sql.Date today = new java.sql.Date(2023, 2, 22);
         List<Sale> saleList = new ArrayList<>();
@@ -120,7 +120,7 @@ public class SaleServiceTest {
     }
 
     @Test // que grabe y devuelva true
-    public void Given_A_Search_Of_All_Sales_When_Invoke_findAll_Then_Return_Boolean_True() {
+    void Given_A_Search_Of_All_Sales_When_Invoke_findAll_Then_Return_Boolean_True() {
         List<Sale> saleList = new ArrayList<>();
         Date today = new Date();
         Sale sale1 = new Sale(2, today, 123, 30, null);

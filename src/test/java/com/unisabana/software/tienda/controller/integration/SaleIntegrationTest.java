@@ -34,6 +34,7 @@ public class SaleIntegrationTest extends AbstractTest {
     private String DOCUMENT_CLIENT;
     private int ID;
 
+    @BeforeEach
     void setUp() {
         saleDTO.setDateCreated(new Date(2023-04-07));
         saleDTO.setDocumentClient((int)(Math.random()*10000));
