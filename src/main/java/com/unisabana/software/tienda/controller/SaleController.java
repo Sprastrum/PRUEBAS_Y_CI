@@ -29,7 +29,7 @@ public class SaleController {
         return new ResponseDTO("No se ha guardado.");
     }
 
-    @RequestMapping(value = "/sale/saveSaleListProducts", method = RequestMethod.POST)
+    @PostMapping("/sale/saveSaleListProducts")
     public List<ResponseDTO> saveSaleListProducts(@RequestBody List<SaleDTO> salesDTOS) {
         List<Sale> sales = new ArrayList<>();
         List<ResponseDTO> results = new ArrayList<>();
